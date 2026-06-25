@@ -1,0 +1,355 @@
+<apex:page controller="TransferController" action="{!checkSession}" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" title="PaySphere – Make Transfer">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PaySphere – Make Transfer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#2563EB',
+            bgLight: '#F0F0EE',
+            pillBg: '#EDEDED'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #F0F0EE; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-800 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-6 shrink-0">
+    <div>
+      <!-- Logo -->
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-9 h-9 bg-brand rounded-lg flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="none">
+            <path fill="#fff" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-lg leading-tight tracking-tight">PaySphere</div>
+          <div class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Enterprise</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-1">
+        <a href="/apex/Dashboard" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="/apex/Beneficiary" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Beneficiaries
+        </a>
+        <a href="/apex/Transfer" class="flex items-center gap-3 px-4 py-3 bg-brand text-white font-medium rounded-xl transition-all">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M16 3h5v5"/>
+            <path d="M4 20L21 3"/>
+            <path d="M21 16v5h-5"/>
+            <path d="M15 15l6 6"/>
+            <path d="M4 4l6 6"/>
+          </svg>
+          Make Transfer
+        </a>
+        <a href="/apex/History" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M12 8v4l3 3"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          Transfer History
+        </a>
+        <a href="/apex/KYC" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          KYC Verification
+        </a>
+        <a href="/apex/Notifications" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          Notifications
+        </a>
+      </nav>
+    </div>
+
+    <!-- User Section -->
+    <div class="border-t border-slate-800 pt-6">
+      <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs font-semibold rounded-lg transition-all">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Initiate Cross-Border Transfer</h1>
+        <p class="text-sm text-slate-500">Send money internationally securely. Verified transactions process instantly.</p>
+      </div>
+    </header>
+
+    <apex:form id="transferForm">
+      <!-- Error and Success Notifications -->
+      <apex:outputPanel id="messagePanel">
+        <apex:outputPanel rendered="{!NOT(ISBLANK(errorMessage))}">
+          <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 flex items-center gap-3">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span class="font-semibold">{!errorMessage}</span>
+          </div>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!NOT(ISBLANK(successMessage))}">
+          <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 flex items-center gap-3">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span class="font-semibold">{!successMessage}</span>
+          </div>
+        </apex:outputPanel>
+      </apex:outputPanel>
+
+      <!-- Wizard Container -->
+      <div class="max-w-2xl mx-auto space-y-8">
+        
+        <!-- Step 1: Input Details -->
+        <div class="glass-card rounded-2xl p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+            <div class="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm">1</div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">Transfer Details</h3>
+              <p class="text-xs text-slate-500">Select recipient, currencies, and amount</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Select Beneficiary *</label>
+              <apex:selectList value="{!selectedBeneficiaryId}" size="1" styleClass="ps-select" disabled="{!otpGenerated}">
+                <apex:selectOptions value="{!beneficiariesOptions}"/>
+              </apex:selectList>
+              <p class="text-[10px] text-slate-400 mt-1">If your beneficiary isn't listed, please add them in the <a href="/apex/Beneficiary" class="text-brand font-semibold hover:underline">Beneficiaries</a> section.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Source Currency</label>
+                <apex:selectList value="{!sourceCurrency}" size="1" styleClass="ps-select" disabled="{!otpGenerated}">
+                  <apex:selectOption itemValue="INR" itemLabel="INR - Indian Rupee"/>
+                  <apex:selectOption itemValue="USD" itemLabel="USD - United States Dollar"/>
+                  <apex:selectOption itemValue="EUR" itemLabel="EUR - Euro"/>
+                  <apex:selectOption itemValue="GBP" itemLabel="GBP - Great British Pound"/>
+                  <apex:selectOption itemValue="AED" itemLabel="AED - UAE Dirham"/>
+                  <apex:selectOption itemValue="SGD" itemLabel="SGD - Singapore Dollar"/>
+                </apex:selectList>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Destination Currency</label>
+                <apex:selectList value="{!destinationCurrency}" size="1" styleClass="ps-select" disabled="{!otpGenerated}">
+                  <apex:selectOption itemValue="USD" itemLabel="USD - United States Dollar"/>
+                  <apex:selectOption itemValue="INR" itemLabel="INR - Indian Rupee"/>
+                  <apex:selectOption itemValue="EUR" itemLabel="EUR - Euro"/>
+                  <apex:selectOption itemValue="GBP" itemLabel="GBP - Great British Pound"/>
+                  <apex:selectOption itemValue="AED" itemLabel="AED - UAE Dirham"/>
+                  <apex:selectOption itemValue="SGD" itemLabel="SGD - Singapore Dollar"/>
+                </apex:selectList>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Send Amount *</label>
+              <apex:input value="{!amount}" type="number" html-step="0.01" styleClass="ps-input" html-placeholder="0.00" disabled="{!otpGenerated}"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Purpose of Remittance</label>
+              <apex:inputText value="{!purpose}" styleClass="ps-input" html-placeholder="e.g. Software Services Invoice, Import Clearance" disabled="{!otpGenerated}"/>
+            </div>
+
+            <apex:outputPanel id="calculationPanel" layout="block" styleClass="mt-6">
+              <!-- Calculation Output (Rendered when exchangeRate has value) -->
+              <apex:outputPanel rendered="{!exchangeRate != null}">
+                <div class="p-4 bg-slate-100/50 border border-slate-200/60 rounded-xl space-y-2 text-xs">
+                  <div class="flex justify-between">
+                    <span class="text-slate-500">Benchmark Exchange Rate:</span>
+                    <span class="font-semibold text-slate-900 font-mono">1 {!sourceCurrency} = {!exchangeRate} {!destinationCurrency}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500">PaySphere Service Fee (1%):</span>
+                    <span class="font-semibold text-slate-900">
+                      {!sourceCurrency}&nbsp;
+                      <apex:outputText value="{0, number, ##,##,##0.00}">
+                        <apex:param value="{!transferFee}"/>
+                      </apex:outputText>
+                    </span>
+                  </div>
+                  <div class="flex justify-between border-t border-slate-200 pt-2 font-medium">
+                    <span class="text-slate-800">Receiver Receives (Estimated):</span>
+                    <span class="font-bold text-brand font-mono text-sm">
+                      {!destinationCurrency}&nbsp;
+                      <apex:outputText value="{0, number, ##,##,##0.0000}">
+                        <apex:param value="{!receiverAmount}"/>
+                      </apex:outputText>
+                    </span>
+                  </div>
+                </div>
+              </apex:outputPanel>
+
+              <div class="flex gap-4 mt-4">
+                <apex:commandButton value="Calculate Fees & Conversion" action="{!calculateRates}" styleClass="flex-1 bg-slate-800 text-white font-semibold py-2.5 rounded-xl hover:bg-slate-700 transition-all cursor-pointer" disabled="{!otpGenerated}" rerender="calculationPanel,messagePanel"/>
+                
+                <apex:outputPanel rendered="{!NOT(otpGenerated)}" layout="none">
+                  <apex:commandButton value="Request Email OTP Verification" action="{!generateOTP}" styleClass="flex-1 bg-brand text-white font-semibold py-2.5 rounded-xl hover:bg-blue-700 transition-all cursor-pointer" rerender="transferForm"/>
+                </apex:outputPanel>
+              </div>
+            </apex:outputPanel>
+          </div>
+        </div>
+
+        <!-- Step 2: Verification (Sent OTP) -->
+        <apex:outputPanel rendered="{!otpGenerated}" layout="block" styleClass="glass-card rounded-2xl p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+            <div class="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm">2</div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">Secure Verification</h3>
+              <p class="text-xs text-slate-500">Enter code sent to your registered email</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <apex:outputPanel rendered="{!NOT(otpVerified)}">
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Verification Code (6-Digit OTP) *</label>
+                <apex:inputText value="{!inputOtp}" styleClass="ps-input text-center font-mono tracking-widest text-lg font-bold" html-placeholder="######" maxlength="6"/>
+              </div>
+
+              <div class="flex gap-4 mt-4">
+                <apex:commandButton value="Verify OTP" action="{!verifyOTP}" styleClass="flex-1 bg-brand text-white font-semibold py-2.5 rounded-xl hover:bg-blue-700 transition-all cursor-pointer" rerender="transferForm"/>
+                <apex:commandButton value="Resend Code" action="{!generateOTP}" styleClass="px-6 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl transition-all cursor-pointer" rerender="transferForm"/>
+              </div>
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!otpVerified}">
+              <div class="p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-3">
+                <svg class="w-6 h-6 shrink-0 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <div class="text-xs">
+                  <span class="font-bold block">Verification Successful</span>
+                  Your transaction request is pre-cleared for creation.
+                </div>
+              </div>
+            </apex:outputPanel>
+          </div>
+        </apex:outputPanel>
+
+        <!-- Step 3: Complete Request -->
+        <apex:outputPanel rendered="{!otpVerified}" layout="block" styleClass="glass-card rounded-2xl p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+            <div class="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm">3</div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">Authorize Request</h3>
+              <p class="text-xs text-slate-500">Review details and submit transaction request</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3 text-xs text-slate-600">
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Total Send Amount:</span>
+                <span class="font-semibold text-slate-900">{!sourceCurrency} {!amount}</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-100 pb-2">
+                <span>Receiver Amount:</span>
+                <span class="font-semibold text-slate-900">{!destinationCurrency} {!receiverAmount}</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Compliance Note:</span>
+                <span class="font-semibold text-slate-900 italic">Transfers > ₹100,000 will be held for Admin manual review.</span>
+              </div>
+            </div>
+
+            <apex:commandButton value="Confirm & Proceed to Payment →" action="{!createTransferRequest}" styleClass="w-full bg-green-600 text-white font-semibold py-3 rounded-xl hover:bg-green-700 transition-all cursor-pointer"/>
+          </div>
+        </apex:outputPanel>
+
+      </div>
+    </apex:form>
+  </main>
+
+  <style>
+    .ps-input {
+      width: 100% !important; padding: 0.65rem 0.85rem !important;
+      background: #fff !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      border-radius: 10px !important; color: #1e293b !important; font-size: 13px !important;
+      outline: none !important; display: block !important;
+      font-family: 'Inter', sans-serif !important;
+      transition: all 0.2s;
+    }
+    .ps-input:focus { border-color: #2563eb !important; box-shadow: 0 0 0 2px rgba(37,99,235,0.1) !important; }
+    
+    .ps-select {
+      width: 100% !important; padding: 0.65rem 0.85rem !important;
+      background: #fff !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      border-radius: 10px !important; color: #1e293b !important; font-size: 13px !important;
+      outline: none !important; display: block !important;
+      font-family: 'Inter', sans-serif !important;
+    }
+  </style>
+
+  <script>
+    function logout() {
+      document.cookie = "paysphere_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = '/apex/Login';
+    }
+  </script>
+</body>
+</html>
+</apex:page>

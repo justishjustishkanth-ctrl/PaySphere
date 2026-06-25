@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <description>Screen Flow for new customer onboarding and register verification.</description>
+    <label>PaySphere Customer Registration Flow</label>
+    <processType>Flow</processType>
+    <screens>
+        <name>Register_Screen</name>
+        <label>Customer Registration Form</label>
+        <locationX>150</locationX>
+        <locationY>150</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Create_Customer_Record</targetReference>
+        </connector>
+        <fields>
+            <name>First_Name</name>
+            <dataType>String</dataType>
+            <fieldText>First Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Last_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Last Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Email_Address</name>
+            <dataType>String</dataType>
+            <fieldText>Email Address</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Mobile_Phone</name>
+            <dataType>String</dataType>
+            <fieldText>Mobile Phone</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <recordCreates>
+        <name>Create_Customer_Record</name>
+        <label>Create Customer Record</label>
+        <locationX>300</locationX>
+        <locationY>150</locationY>
+        <inputAssignments>
+            <field>First_Name__c</field>
+            <value>
+                <elementReference>First_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Last_Name__c</field>
+            <value>
+                <elementReference>Last_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Email__c</field>
+            <value>
+                <elementReference>Email_Address</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Mobile_Number__c</field>
+            <value>
+                <elementReference>Mobile_Phone</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Account_Status__c</field>
+            <value>
+                <stringValue>PENDING_VERIFICATION</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Customer__c</object>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Register_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>

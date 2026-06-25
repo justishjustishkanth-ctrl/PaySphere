@@ -1,0 +1,305 @@
+<apex:page controller="BeneficiaryController" action="{!checkSession}" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" title="PaySphere – Beneficiaries">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PaySphere – Beneficiaries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#2563EB',
+            bgLight: '#F0F0EE',
+            pillBg: '#EDEDED'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #F0F0EE; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-800 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-6 shrink-0">
+    <div>
+      <!-- Logo -->
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-9 h-9 bg-brand rounded-lg flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="none">
+            <path fill="#fff" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-lg leading-tight tracking-tight">PaySphere</div>
+          <div class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Enterprise</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-1">
+        <a href="/apex/Dashboard" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="/apex/Beneficiary" class="flex items-center gap-3 px-4 py-3 bg-brand text-white font-medium rounded-xl transition-all">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Beneficiaries
+        </a>
+        <a href="/apex/Transfer" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M16 3h5v5"/>
+            <path d="M4 20L21 3"/>
+            <path d="M21 16v5h-5"/>
+            <path d="M15 15l6 6"/>
+            <path d="M4 4l6 6"/>
+          </svg>
+          Make Transfer
+        </a>
+        <a href="/apex/History" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M12 8v4l3 3"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          Transfer History
+        </a>
+        <a href="/apex/KYC" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          KYC Verification
+        </a>
+        <a href="/apex/Notifications" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          Notifications
+        </a>
+      </nav>
+    </div>
+
+    <!-- User Section -->
+    <div class="border-t border-slate-800 pt-6">
+      <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs font-semibold rounded-lg transition-all">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Manage Beneficiaries</h1>
+        <p class="text-sm text-slate-500">Register and verify destination banks for international transfer settlements.</p>
+      </div>
+    </header>
+
+    <apex:form id="beneficiaryForm">
+      <!-- Error and Success Notifications -->
+      <apex:outputPanel id="messagePanel">
+        <apex:outputPanel rendered="{!NOT(ISBLANK(errorMessage))}">
+          <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 flex items-center gap-3">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span class="font-semibold">{!errorMessage}</span>
+          </div>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!NOT(ISBLANK(successMessage))}">
+          <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 flex items-center gap-3">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span class="font-semibold">{!successMessage}</span>
+          </div>
+        </apex:outputPanel>
+      </apex:outputPanel>
+
+      <!-- Layout Grid: Form on the Left, List on the Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Side: Add Beneficiary Form -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm h-fit">
+          <h3 class="font-bold text-slate-900 text-base mb-1">Add Beneficiary</h3>
+          <p class="text-xs text-slate-500 mb-6">Create a destination profile</p>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">FullName *</label>
+              <apex:inputText value="{!name}" styleClass="ps-input" html-placeholder="Beneficiary Legal Name"/>
+            </div>
+            
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Destination Country *</label>
+              <apex:inputText value="{!country}" styleClass="ps-input" html-placeholder="e.g. USA, UK, Singapore"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Bank Name *</label>
+              <apex:inputText value="{!bankName}" styleClass="ps-input" html-placeholder="e.g. Citibank, HSBC"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Account / IBAN *</label>
+              <apex:inputText value="{!accountNumber}" styleClass="ps-input" html-placeholder="Account or IBAN code"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">SWIFT / BIC *</label>
+              <apex:inputText value="{!swiftBic}" styleClass="ps-input" html-placeholder="8 or 11 character code"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Contact Number</label>
+              <apex:inputText value="{!mobile}" styleClass="ps-input" html-placeholder="e.g. +1234567890"/>
+            </div>
+
+            <apex:commandButton value="Add Beneficiary" action="{!addBeneficiary}" styleClass="w-full mt-2 bg-brand text-white font-semibold py-2.5 rounded-xl hover:bg-blue-700 transition-all cursor-pointer" rerender="beneficiaryForm,messagePanel"/>
+          </div>
+        </div>
+
+        <!-- Right Side: Search and Beneficiaries List -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="glass-card rounded-2xl p-6 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">Beneficiary Directories</h3>
+                <p class="text-xs text-slate-500">Verified and pending payout profiles</p>
+              </div>
+              
+              <!-- Search bar -->
+              <div class="flex items-center gap-2">
+                <apex:inputText value="{!searchName}" styleClass="ps-input-search" html-placeholder="Search by name..."/>
+                <apex:commandButton value="Search" action="{!loadBeneficiaries}" styleClass="bg-slate-800 text-white font-semibold px-4 py-2 rounded-xl text-xs hover:bg-slate-700 transition-all cursor-pointer" rerender="beneficiaryForm"/>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-200/60 text-slate-400 text-[11px] font-semibold tracking-wider uppercase">
+                    <th class="pb-3">Name</th>
+                    <th class="pb-3">Bank Details</th>
+                    <th class="pb-3">Country</th>
+                    <th class="pb-3">Status</th>
+                    <th class="pb-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100/60 text-xs">
+                  <apex:repeat value="{!beneficiaries}" var="ben">
+                    <tr>
+                      <td class="py-3.5">
+                        <div class="font-semibold text-slate-900">{!ben.Name}</div>
+                        <div class="text-[10px] text-slate-400">{!ben.Mobile__c}</div>
+                      </td>
+                      <td class="py-3.5">
+                        <div class="font-medium text-slate-800">{!ben.Bank_Name__c}</div>
+                        <div class="font-mono text-[10px] text-slate-500">A/C: {!ben.Account_Number__c} · SWIFT: {!ben.SWIFT_BIC__c}</div>
+                      </td>
+                      <td class="py-3.5 font-medium text-slate-800">{!ben.Country__c}</td>
+                      <td class="py-3.5">
+                        <apex:outputPanel rendered="{!ben.Status__c == 'APPROVED'}">
+                          <span class="px-2.5 py-0.5 bg-green-50 text-green-700 border border-green-200/50 rounded-full font-semibold">Approved</span>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!ben.Status__c == 'PENDING'}">
+                          <span class="px-2.5 py-0.5 bg-yellow-50 text-yellow-700 border border-yellow-200/50 rounded-full font-semibold">Pending</span>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!ben.Status__c == 'REJECTED'}">
+                          <span class="px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-200/50 rounded-full font-semibold">Rejected</span>
+                        </apex:outputPanel>
+                      </td>
+                      <td class="py-3.5 text-right">
+                        <apex:commandButton value="Delete" action="{!deleteBeneficiary}" styleClass="bg-red-50 hover:bg-red-600 hover:text-white border border-red-200 text-red-600 font-semibold px-3 py-1 rounded-lg text-[10px] transition-all cursor-pointer" rerender="beneficiaryForm">
+                          <apex:param name="delId" value="{!ben.Id}" assignTo="{!editId}"/>
+                        </apex:commandButton>
+                      </td>
+                    </tr>
+                  </apex:repeat>
+                  <apex:outputPanel rendered="{!beneficiaries.size == 0}">
+                    <tr>
+                      <td colspan="5" class="py-12 text-center text-slate-400">No beneficiaries found matching search criteria.</td>
+                    </tr>
+                  </apex:outputPanel>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </apex:form>
+  </main>
+
+  <style>
+    .ps-input {
+      width: 100% !important; padding: 0.65rem 0.85rem !important;
+      background: #fff !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      border-radius: 10px !important; color: #1e293b !important; font-size: 13px !important;
+      outline: none !important; display: block !important;
+      font-family: 'Inter', sans-serif !important;
+      transition: all 0.2s;
+    }
+    .ps-input:focus { border-color: #2563eb !important; box-shadow: 0 0 0 2px rgba(37,99,235,0.1) !important; }
+    
+    .ps-input-search {
+      width: 180px !important; padding: 0.5rem 0.75rem !important;
+      background: #fff !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      border-radius: 10px !important; color: #1e293b !important; font-size: 12px !important;
+      outline: none !important; display: block !important;
+      font-family: 'Inter', sans-serif !important;
+      transition: all 0.2s;
+    }
+    .ps-input-search:focus { width: 220px !important; border-color: #2563eb !important; }
+  </style>
+
+  <script>
+    function logout() {
+      document.cookie = "paysphere_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = '/apex/Login';
+    }
+  </script>
+</body>
+</html>
+</apex:page>

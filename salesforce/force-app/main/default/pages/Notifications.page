@@ -1,0 +1,212 @@
+<apex:page controller="NotificationController" action="{!checkSession}" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" title="PaySphere – Notifications">
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PaySphere – Notifications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#2563EB',
+            bgLight: '#F0F0EE',
+            pillBg: '#EDEDED'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #F0F0EE; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-800 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-6 shrink-0">
+    <div>
+      <!-- Logo -->
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-9 h-9 bg-brand rounded-lg flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="none">
+            <path fill="#fff" d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-lg leading-tight tracking-tight">PaySphere</div>
+          <div class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Enterprise</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-1">
+        <a href="/apex/Dashboard" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="/apex/Beneficiary" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Beneficiaries
+        </a>
+        <a href="/apex/Transfer" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M16 3h5v5"/>
+            <path d="M4 20L21 3"/>
+            <path d="M21 16v5h-5"/>
+            <path d="M15 15l6 6"/>
+            <path d="M4 4l6 6"/>
+          </svg>
+          Make Transfer
+        </a>
+        <a href="/apex/History" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M12 8v4l3 3"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          Transfer History
+        </a>
+        <a href="/apex/KYC" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          KYC Verification
+        </a>
+        <a href="/apex/Notifications" class="flex items-center gap-3 px-4 py-3 bg-brand text-white font-medium rounded-xl transition-all">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          Notifications
+        </a>
+      </nav>
+    </div>
+
+    <!-- User Section -->
+    <div class="border-t border-slate-800 pt-6">
+      <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs font-semibold rounded-lg transition-all">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Notifications</h1>
+        <p class="text-sm text-slate-500">Stay updated with security alerts, KYC status updates, and transaction confirmations.</p>
+      </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto">
+      <div class="glass-card rounded-2xl p-6 shadow-sm divide-y divide-slate-100">
+        <apex:repeat value="{!notifications}" var="notif">
+          <div class="py-4 flex gap-4 items-start first:pt-0 last:pb-0">
+            <!-- Icon category -->
+            <div class="shrink-0 mt-1">
+              <apex:outputPanel rendered="{!notif.Type__c == 'KYC'}">
+                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                </div>
+              </apex:outputPanel>
+              <apex:outputPanel rendered="{!notif.Type__c == 'TRANSFER'}">
+                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                  <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </div>
+              </apex:outputPanel>
+              <apex:outputPanel rendered="{!notif.Type__c == 'PAYMENT'}">
+                <div class="w-8 h-8 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                  <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+              </apex:outputPanel>
+              <apex:outputPanel rendered="{!notif.Type__c == 'FRAUD' || notif.Type__c == 'ALERT'}">
+                <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center animate-pulse">
+                  <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                </div>
+              </apex:outputPanel>
+              <apex:outputPanel rendered="{!notif.Type__c != 'KYC' && notif.Type__c != 'TRANSFER' && notif.Type__c != 'PAYMENT' && notif.Type__c != 'FRAUD' && notif.Type__c != 'ALERT'}">
+                <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center">
+                  <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                  </svg>
+                </div>
+              </apex:outputPanel>
+            </div>
+            
+            <!-- Message Body -->
+            <div class="flex-1">
+              <p class="text-slate-800 text-xs leading-relaxed font-medium">{!notif.Message__c}</p>
+              <div class="flex items-center gap-2 mt-1.5 text-[10px] text-slate-400">
+                <span class="font-bold uppercase tracking-wider text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-mono">{!notif.Type__c}</span>
+                <span>·</span>
+                <span>
+                  <apex:outputText value="{0,date,yyyy-MM-dd HH:mm:ss}">
+                    <apex:param value="{!notif.Timestamp__c}"/>
+                  </apex:outputText>
+                </span>
+              </div>
+            </div>
+          </div>
+        </apex:repeat>
+
+        <apex:outputPanel rendered="{!notifications.size == 0}">
+          <div class="py-12 text-center text-slate-400 text-xs">
+            <svg class="w-10 h-10 mx-auto text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            No notifications recorded yet.
+          </div>
+        </apex:outputPanel>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function logout() {
+      document.cookie = "paysphere_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = '/apex/Login';
+    }
+  </script>
+</body>
+</html>
+</apex:page>

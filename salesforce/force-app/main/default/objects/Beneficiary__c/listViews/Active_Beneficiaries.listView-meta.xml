@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Beneficiaries</fullName>
+    <filterScope>Everything</filterScope>
+    <label>Active Beneficiaries</label>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>APPROVED</value>
+    </filters>
+
+</ListView>

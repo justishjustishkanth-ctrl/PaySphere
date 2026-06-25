@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <description>Triggers when OTP Log status updates (e.g. to VERIFIED) to log details and execute verification post-processing.</description>
+    <label>PaySphere OTP Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_OTP_Audit_Entry</name>
+        <label>Create OTP Audit Entry</label>
+        <locationX>150</locationX>
+        <locationY>150</locationY>
+        <inputAssignments>
+            <field>Action__c</field>
+            <value>
+                <stringValue>OTP Status Updated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Details__c</field>
+            <value>
+                <stringValue>OTP Verification for Mobile {!$Record.Mobile_Number__c} status changed to {!$Record.OTP_Status__c}. Details: {!$Record.Details__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>SUCCESS</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Audit_Log__c</object>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Create_OTP_Audit_Entry</targetReference>
+        </connector>
+        <object>OTP_Log__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

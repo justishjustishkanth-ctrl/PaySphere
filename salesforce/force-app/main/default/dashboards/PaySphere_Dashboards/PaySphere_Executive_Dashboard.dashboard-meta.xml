@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <backgroundEndColor>#FFFFFF</backgroundEndColor>
+    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
+    <backgroundStartColor>#FFFFFF</backgroundStartColor>
+    <chartTheme>light</chartTheme>
+    <colorPalette>unity</colorPalette>
+    <dashboardGridLayout>
+        <!-- Row 0: KPI Metric Widgets -->
+        <dashboardGridComponents>
+            <colSpan>2</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Total Customers</header>
+                <report>PaySphere_Reports/Customer_Summary</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Growth from last month: +12%</footer>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>2</colSpan>
+            <columnIndex>2</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Total Transactions</header>
+                <report>PaySphere_Reports/Transaction_Summary</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Daily trend: Up</footer>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>2</colSpan>
+            <columnIndex>4</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Total Amount Sent</header>
+                <report>PaySphere_Reports/Transaction_Summary</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>MoM growth: +8.5%</footer>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>2</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Successful Transactions</header>
+                <report>PaySphere_Reports/Successful_Transactions</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Success rate: 98.4%</footer>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>2</colSpan>
+            <columnIndex>8</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Pending Transactions</header>
+                <report>PaySphere_Reports/Pending_Transactions</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Awaiting settlement</footer>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>2</colSpan>
+            <columnIndex>10</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Failed Transactions</header>
+                <report>PaySphere_Reports/Failed_Transaction_Report</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Failure rate: 1.6%</footer>
+            </dashboardComponent>
+            <rowIndex>0</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+
+        <!-- Row 2: Executive Insights Section -->
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>KYC Approval Rate</header>
+                <report>PaySphere_Reports/KYC_Status_Distribution</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Approved vs. Pending</footer>
+            </dashboardComponent>
+            <rowIndex>2</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>3</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Average Transaction Amount</header>
+                <report>PaySphere_Reports/Average_Transaction_Amount</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Per-transfer average</footer>
+            </dashboardComponent>
+            <rowIndex>2</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Fraud Detection Alerts</header>
+                <report>PaySphere_Reports/Fraud_Alerts_Report</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>Requires actions</footer>
+            </dashboardComponent>
+            <rowIndex>2</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>3</colSpan>
+            <columnIndex>9</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <componentType>Metric</componentType>
+                <header>Customer Acquisition</header>
+                <report>PaySphere_Reports/Customer_Acquisition_This_Month</report>
+                <indicatorHighColor>#2E844A</indicatorHighColor>
+                <indicatorLowColor>#BA0517</indicatorLowColor>
+                <indicatorMiddleColor>#FE9339</indicatorMiddleColor>
+                <footer>New accounts this month</footer>
+            </dashboardComponent>
+            <rowIndex>2</rowIndex>
+            <rowSpan>2</rowSpan>
+        </dashboardGridComponents>
+
+        <!-- Row 4: Advanced Charts Row 1 -->
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Line</componentType>
+                <header>Transaction Volume Trend</header>
+                <report>PaySphere_Reports/Monthly_Transaction_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>4</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Bar</componentType>
+                <header>Revenue / Amount Sent Trend</header>
+                <report>PaySphere_Reports/Monthly_Transaction_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>4</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+
+        <!-- Row 8: Advanced Charts Row 2 -->
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Bar</componentType>
+                <header>Transactions by Country</header>
+                <report>PaySphere_Reports/Country_Wise_Transaction_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>8</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Donut</componentType>
+                <header>Transactions by Currency</header>
+                <report>PaySphere_Reports/Transactions_by_Currency</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>8</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+
+        <!-- Row 12: Advanced Charts Row 3 -->
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Line</componentType>
+                <header>Customer Growth</header>
+                <report>PaySphere_Reports/Customer_Growth</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>12</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Pie</componentType>
+                <header>KYC Status Distribution</header>
+                <report>PaySphere_Reports/KYC_Status_Distribution</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>12</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+
+        <!-- Row 16: Operations Monitoring Tables -->
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Bar</componentType>
+                <header>Recent Transactions</header>
+                <report>PaySphere_Reports/Recent_Transactions_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>16</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>6</colSpan>
+            <columnIndex>6</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Bar</componentType>
+                <header>Failed Transactions</header>
+                <report>PaySphere_Reports/Failed_Transaction_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>16</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+
+        <!-- Row 20: Operations Monitoring Stats -->
+        <dashboardGridComponents>
+            <colSpan>4</colSpan>
+            <columnIndex>0</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Donut</componentType>
+                <header>OTP Verification Statistics</header>
+                <report>PaySphere_Reports/OTP_Verification_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>20</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>4</colSpan>
+            <columnIndex>4</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Donut</componentType>
+                <header>Notification Delivery Status</header>
+                <report>PaySphere_Reports/Notification_Delivery_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>20</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+        <dashboardGridComponents>
+            <colSpan>4</colSpan>
+            <columnIndex>8</columnIndex>
+            <dashboardComponent>
+                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <chartAxisRange>Auto</chartAxisRange>
+                <componentType>Bar</componentType>
+                <header>Audit Log Summary</header>
+                <report>PaySphere_Reports/Audit_Log_Summary_Report</report>
+                <sortBy>RowLabelAscending</sortBy>
+            </dashboardComponent>
+            <rowIndex>20</rowIndex>
+            <rowSpan>4</rowSpan>
+        </dashboardGridComponents>
+
+        <numberOfColumns>12</numberOfColumns>
+        <rowHeight>36</rowHeight>
+    </dashboardGridLayout>
+    <dashboardType>LoggedInUser</dashboardType>
+    <isGridLayout>true</isGridLayout>
+    <textColor>#000000</textColor>
+    <title>PaySphere Executive Dashboard</title>
+    <titleColor>#000000</titleColor>
+    <titleSize>12</titleSize>
+</Dashboard>

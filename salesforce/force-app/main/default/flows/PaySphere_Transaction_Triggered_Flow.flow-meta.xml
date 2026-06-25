@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <description>Triggered when a Transaction is created. Creates Audit Log, sends Notifications and updates related records.</description>
+    <label>PaySphere Transaction Triggered Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Audit_Log</name>
+        <label>Create Audit Log</label>
+        <locationX>150</locationX>
+        <locationY>150</locationY>
+        <connector>
+            <targetReference>Create_Notification</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Action__c</field>
+            <value>
+                <stringValue>Transaction Processed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Details__c</field>
+            <value>
+                <stringValue>Payment Transaction of amount {!$Record.Amount__c} {!$Record.Currency__c} status: {!$Record.Status__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>SUCCESS</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Audit_Log__c</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Notification</name>
+        <label>Create Notification</label>
+        <locationX>300</locationX>
+        <locationY>150</locationY>
+        <inputAssignments>
+            <field>Customer__c</field>
+            <value>
+                <elementReference>$Record.Customer__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Message__c</field>
+            <value>
+                <stringValue>Your remittance of {!$Record.Amount__c} {!$Record.Currency__c} was processed successfully.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Title__c</field>
+            <value>
+                <stringValue>Payment Complete</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type__c</field>
+            <value>
+                <stringValue>PAYMENT</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Notification__c</object>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Create_Audit_Log</targetReference>
+        </connector>
+        <object>Payment_Transaction__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
